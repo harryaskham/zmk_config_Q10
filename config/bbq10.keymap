@@ -47,28 +47,6 @@
         };
     };
     behaviors {
-        ht_1s: long_ht {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <1000>;
-            bindings = <&out &kp>;
-            tapping-term-ms = <150>;
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
-    };
-    behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <150>;
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
-    };
-    behaviors {
         bhm: balanced_homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -151,7 +129,7 @@
                  &kp PAGE_DOWN                                                                                     &kp PAGE_UP
     &mt ESC TAB                 &kp C_AC_SEARCH                     &mkp LCLK                        &kp F5                            &kp F12
     &td_symq         &kp N1     &kp N2      &kp N3    &td_lpar      &td_rpar        &kp UNDER        &kp MINUS        &kp PLUS         &kp AT
-    &bmh LCTRL STAR  &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON       &kp SEMI         &kp APOS         &kp DQT          &kp DEL
+    &bhm LCTRL STAR  &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON       &kp SEMI         &kp APOS         &kp DQT          &kp DEL
     &sk  LSHIFT      &kp N7     &kp N8      &kp N9    &kp QMARK     &kp EXCL        &kp COMMA        &kp DOT          &kp C_MUTE       &kp ENTER
     MO_TOG(LOWER)               &kp N0                              &kp SPACE                        MO_TOG(SYM)                       MO_TOG(UPPER)
             >;
