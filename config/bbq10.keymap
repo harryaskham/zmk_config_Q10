@@ -16,7 +16,6 @@
 #define SYM 1
 #define UPPER 2
 #define LOWER 3
-#define GAME 4
 
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 
