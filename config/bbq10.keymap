@@ -140,7 +140,7 @@
     &bhm LCTRL Q   &kp W      &kp E       &kp R     &kp T         &kp Y             &kp U            &kp I            &kp O            &kp P
     &bhm LCTRL A   &kp S      &kp D       &kp F     &kp G         &kp H             &kp J            &kp K            &kp L            &kp BSPC
     &sk LSHIFT     &kp Z      &kp X       &kp C     &kp V         &kp B             &kp N            &kp M            &kp DOT          &kp ENTER
-    &MO_TOG(LOWER)            &kp LALT                            &kp SPACE                          MO_TOG(SYM)                       MO_TOG(UPPER)
+    MO_TOG(LOWER)             &kp LALT                            &kp SPACE                          MO_TOG(SYM)                       MO_TOG(UPPER)
             >;
         };
 
@@ -153,7 +153,7 @@
     &td_symq         &kp N1     &kp N2      &kp N3    &td_lpar      &td_rpar        &kp UNDER        &kp MINUS        &kp PLUS         &kp AT
     &bmh LCTRL STAR  &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON       &kp SEMI         &kp APOS         &kp DQT          &kp DEL
     &sk  LSHIFT      &kp N7     &kp N8      &kp N9    &kp QMARK     &kp EXCL        &kp COMMA        &kp DOT          &kp C_MUTE       &kp ENTER
-    &MO_TOG(LOWER)              &kp N0                              &kp SPACE                        MO_TOG(SYM)                       MO_TOG(UPPER)
+    MO_TOG(LOWER)               &kp N0                              &kp SPACE                        MO_TOG(SYM)                       MO_TOG(UPPER)
             >;
         };
 
@@ -165,7 +165,7 @@
     &none         &kp UP     &none       &sys_reset &kp LBRC      &kp RBRC      &kp LT           &kp GT             &kp PIPE         &kp KP_EQUAL
     &kp  LEFT     &kp DOWN   &kp RIGHT   &none      &kp BSLH      &kp AMPS      &kp LBRC         &kp RBRC           &kp CARET        &kp BSPC
     &kp  LCTRL    &none      &none       &none      &bl BL_DEC    &bl BL_TOG    &bl BL_INC       &ext_power EP_TOG  &bootloader      &kp ENTER
-    &MO_TOG(LOWER)           &kp LALT                             &tog_out OUT_TOG SPACE         MO_TOG(SYM)                         MO_TOG(UPPER)
+    MO_TOG(LOWER)            &kp LALT                             &tog_out OUT_TOG SPACE         MO_TOG(SYM)                         MO_TOG(UPPER)
             >;
         };
 
@@ -177,7 +177,7 @@
     &trans          &trans       &trans     &trans     &trans        &kp PAGE_UP   &msc SCRL_UP  &kp UP          &msc SCRL_DOWN    &trans
     &trans          &trans       &trans     &trans     &trans        &kp PAGE_DOWN &kp LEFT      &kp DOWN        &kp RIGHT         &trans
     &trans          &trans       &trans     &trans     &trans        &trans        &trans        &trans          &trans            &trans
-    &MO_TOG(LOWER)               &trans                              &trans                      &trans                            &trans
+    MO_TOG(LOWER)                &trans                              &trans                      &trans                            &trans
             >;
         };
 
