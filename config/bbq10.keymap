@@ -15,11 +15,24 @@
    
 #define SYM 1
 #define UPPER 2
+#define LOWER 3
+#define GAME 4
+
+#define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 
 
 / {
     behaviors {
-        td0: tap_dance_0 {
+        mo_tog: behavior_mo_tog {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&tog>;
+        };
+    };
+    behaviors {
+        td_clk_bt: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
@@ -27,11 +40,75 @@
         };
     };
     behaviors {
-        hm: homerow_mods {
+        tog_out: tog_out {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <500>;
             bindings = <&out &kp>;
+        };
+    };
+    behaviors {
+        ht_1s: long_ht {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <1000>;
+            bindings = <&out &kp>;
+            tapping-term-ms = <150>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+    behaviors {
+        bhm: balanced_homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;    // <---[[moderate duration]]
+            quick-tap-ms = <0>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+    behaviors {
+        td_lpar: lpar {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&mt LBKT LPAR>, <&mt LT LBRC>;
+        };
+    };
+    behaviors {
+        td_rpar: rpar {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&mt RBKT RPAR>, <&mt GT RBRC>;
+        };
+    };
+    behaviors {
+        td_dol: dollarkey {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&mt DOT COMMA>, <&mt DQT APOS>, <&mt COLON SEMI>, <&mt PIPE BACKSLASH>;
+        };
+    };
+    behaviors {
+        td_symq: dollarkey {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&kp HASH>, <&mt GRAVE TILDE>;
         };
     };
 
@@ -50,12 +127,20 @@
 //        |         aA     |         0           |           SPACE              |         SYM         |        aA          |       
 //        -----------------------------------------------------------------------------------------------------------------
 
+// Double click trackpad in upper to clear BT when pairing new device
+// Toggle bluetooth or usb with upper+space-hold
+// Sym layer has paren-taps\( -> \[ then \{ -> \<
+// upper has WASD, lower has ijkl arrows
+// shift is sticky
+// hold-tap homerow; Q for ESC, A for Ctrl
+// misc button cycles through ., '" ;: \|
+
                  &mkp LCLK                                                                                          &mkp RCLK
-    &kp CLCK                &kp LGUI                            &mkp LCLK                          &mt ESC K_BACK                    &kp TAB
-    &kp Q        &kp W      &kp E       &kp R     &kp T         &kp Y             &kp U            &kp I            &kp O            &kp P
-    &kp A        &kp S      &kp D       &kp F     &kp G         &kp H             &kp J            &kp K            &kp L            &kp BSPC
-    &kp LSHFT    &kp Z      &kp X       &kp C     &kp V         &kp B             &kp N            &kp M            &kp SEMI         &kp ENTER
-    &kp LCTRL               &kp LALT                            &kp SPACE                          &tog SYM                          &tog UPPER
+    &mt ESC TAB               &kp LGUI                            &mkp LCLK                            &mt ESC K_BACK                    &kp BSPC
+    &bhm LCTRL Q   &kp W      &kp E       &kp R     &kp T         &kp Y             &kp U            &kp I            &kp O            &kp P
+    &bhm LCTRL A   &kp S      &kp D       &kp F     &kp G         &kp H             &kp J            &kp K            &kp L            &kp BSPC
+    &sk LSHIFT     &kp Z      &kp X       &kp C     &kp V         &kp B             &kp N            &kp M            &kp DOT          &kp ENTER
+    &MO_TOG(LOWER)            &kp LALT                            &kp SPACE                          MO_TOG(SYM)                       MO_TOG(UPPER)
             >;
         };
 
@@ -63,12 +148,12 @@
         sym_layer {
 
             bindings = <        
-                 &kp C_VOL_UP                                                                                       &kp C_VOL_DN
-    &kp PSCRN               &kp C_AC_SEARCH                     &mkp LCLK                          &kp F5                            &kp F12 
-    &kp HASH     &kp N1     &kp N2      &kp N3    &mt LBKT LPAR &mt RBKT RPAR     &kp UNDER        &kp MINUS        &kp PLUS         &kp AT
-    &kp STAR     &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON         &kp SEMI         &kp APOS         &kp DQT          &kp DEL
-    &kp LSHFT    &kp N7     &kp N8      &kp N9    &kp QMARK     &kp EXCL          &kp COMMA        &kp DOT          &kp C_MUTE       &kp ENTER
-    &kp LCTRL               &kp N0                              &kp SPACE                          &tog SYM                          &tog UPPER
+                 &kp PAGE_DOWN                                                                                     &kp PAGE_UP
+    &mt ESC TAB                 &kp C_AC_SEARCH                     &mkp LCLK                        &kp F5                            &kp F12
+    &td_symq         &kp N1     &kp N2      &kp N3    &td_lpar      &td_rpar        &kp UNDER        &kp MINUS        &kp PLUS         &kp AT
+    &bmh LCTRL STAR  &kp N4     &kp N5      &kp N6    &kp SLASH     &kp COLON       &kp SEMI         &kp APOS         &kp DQT          &kp DEL
+    &sk  LSHIFT      &kp N7     &kp N8      &kp N9    &kp QMARK     &kp EXCL        &kp COMMA        &kp DOT          &kp C_MUTE       &kp ENTER
+    &MO_TOG(LOWER)              &kp N0                              &kp SPACE                        MO_TOG(SYM)                       MO_TOG(UPPER)
             >;
         };
 
@@ -76,13 +161,26 @@
 
             bindings = <
                  &msc SCRL_UP                                                                                       &msc SCRL_DOWN
-    &bt BT_SEL 0            &bt BT_SEL 1                             &td0                           &bt BT_SEL 2                     &bt BT_SEL 3
-    &none        &kp UP     &none       &sys_reset &ext_power EP_TOG &none         &kp LT           &kp GT          &kp PIPE         &kp KP_EQUAL
-    &kp LEFT     &kp DOWN   &kp RIGHT   &none      &kp BSLH          &kp AMPS      &kp LBRC         &kp RBRC        &kp CARET        &kp BSPC
-    &kp LSHFT    &none      &none       &none      &bl BL_DEC        &bl BL_TOG    &bl BL_INC       &none           &bootloader      &kp ENTER
-    &kp LCTRL               &kp LALT                                 &hm OUT_TOG SPACE              &tog SYM                         &tog UPPER
+    &bt  BT_SEL 0            &bt BT_SEL 1                         &td_clk_bt                     &bt BT_SEL 2                        &bt BT_SEL 3
+    &none         &kp UP     &none       &sys_reset &kp LBRC      &kp RBRC      &kp LT           &kp GT             &kp PIPE         &kp KP_EQUAL
+    &kp  LEFT     &kp DOWN   &kp RIGHT   &none      &kp BSLH      &kp AMPS      &kp LBRC         &kp RBRC           &kp CARET        &kp BSPC
+    &kp  LCTRL    &none      &none       &none      &bl BL_DEC    &bl BL_TOG    &bl BL_INC       &ext_power EP_TOG  &bootloader      &kp ENTER
+    &MO_TOG(LOWER)           &kp LALT                             &tog_out OUT_TOG SPACE         MO_TOG(SYM)                         MO_TOG(UPPER)
             >;
         };
+
+        lower_layer {
+
+            bindings = <
+                 &trans                                                                                            &trans
+    &trans          &trans                                           &mkp MCLK                   &trans                            &trans
+    &trans          &trans       &trans     &trans     &trans        &kp PAGE_UP   &msc SCRL_UP  &kp UP          &msc SCRL_DOWN    &trans
+    &trans          &trans       &trans     &trans     &trans        &kp PAGE_DOWN &kp LEFT      &kp DOWN        &kp RIGHT         &trans
+    &trans          &trans       &trans     &trans     &trans        &trans        &trans        &trans          &trans            &trans
+    &MO_TOG(LOWER)               &trans                              &trans                      &trans                            &trans
+            >;
+        };
+
     };
 };
 
