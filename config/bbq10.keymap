@@ -17,7 +17,7 @@
 #define UPPER 2
 #define LOWER 3
 
-#define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
+#define MO_TOG(layer) &mo_tog layer layer
 
 
 / {
@@ -126,6 +126,7 @@
 //        |         aA     |         0           |           SPACE              |         SYM         |        aA          |       
 //        -----------------------------------------------------------------------------------------------------------------
 
+// upper-dollar to flash bootloader
 // Double click trackpad in upper to clear BT when pairing new device
 // Toggle bluetooth or usb with upper+space-hold
 // Sym layer has paren-taps\( -> \[ then \{ -> \<
