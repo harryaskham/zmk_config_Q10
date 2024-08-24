@@ -22,6 +22,13 @@
 
 / {
     behaviors {
+        tap: tap {
+            compatible = "zmk,behavior-macro-one-param";
+                #binding-cells = <1>;
+                bindings = <&macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            };
+    };
+    behaviors {
   	    mtt: mod_tap_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -179,6 +186,13 @@
 // Toggle bluetooth or usb with upper+space-hold
 // upper has WASD, lower has ijkl arrows
 // shift is sticky
+// quick access:
+// double hold + for =
+//             / for \
+//             , for <
+//             . for >
+//             a for *
+//             q for #
 
                  &mkp LCLK                                                                                             &mkp RCLK
     &kp ESC                        &kp LGUI                              &mkp LCLK                        &kp C_AC_BACK                      &kp C_AC_SEARCH
