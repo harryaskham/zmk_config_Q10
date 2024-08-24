@@ -171,18 +171,18 @@
 //        |         aA     |         0           |           SPACE              |         SYM         |        aA          |       
 //        -----------------------------------------------------------------------------------------------------------------
 
+// ctrl-a via taphold 0 a
+// alt-n via hold a, hold n
+// tap t, hold (, double tap [, double hold {
 // upper-dollar to flash bootloader
 // Double click trackpad in upper to clear BT when pairing new device
 // Toggle bluetooth or usb with upper+space-hold
-// Sym layer has paren-taps\( -> \[ then \{ -> \<
 // upper has WASD, lower has ijkl arrows
 // shift is sticky
-// hold-tap homerow; Q for ESC, A for Ctrl, S for Ctrl (if we need ctrl a)
-// misc button cycles through ., '" ;: \|
 
                  &mkp LCLK                                                                                             &mkp RCLK
     &kp ESC                        &kp LGUI                              &mkp LCLK                        &kp C_AC_BACK                      &kp C_AC_SEARCH
-    &tq_q_tab_hash   &mtt N1 W     &mtt N2 E   &mtt N3 R   &td_lpar_t    &mtt td_rpar_y  &mtt UNDER U     &mtt MINUS I     &td_plus_o_eq      &mtt AT P
+    &tq_q_tab_hash   &mtt N1 W     &mtt N2 E   &mtt N3 R   &td_lpar_t    &td_rpar_y      &mtt UNDER U     &mtt MINUS I     &td_plus_o_eq      &mtt AT P
     &td_a_ctrl_star  &mtt N4 S     &mtt N5 D   &mtt N6 F   &td_g_slash   &mtt COLON H    &mtt SEMI J      &mtt APOS K      &mtt DQT L         &kp BSPC
     &sk LSHIFT       &mtt N7 Z     &mtt N8 X   &mtt N9 C   &mtt QMARK V  &mtt EXCL B     &td_n_comma_lt   &td_m_dot_gt     &mtt PIPE DOLLAR   &kp ENTER
     &tog LOWER                     &td_0_alt_ctrl                        &kp SPACE                        &tog SYM                            &tog UPPER
