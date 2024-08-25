@@ -19,6 +19,10 @@
 
 #define MO_TOG(layer) &mo_tog layer layer
 
+&sk {
+    release-after-ms = <3000>;
+};
+
 
 / {
     behaviors {
@@ -140,16 +144,14 @@
             bindings = <&kp GRAVE>, <&kp TILDE>;
             mods = <(MOD_LCTL|MOD_RCTL)>;
         };
+    };
+    behaviors {
         gresc: grave_escape {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp ESC>, <&gresc_inner>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-    };
-
-    &sk {
-      release-after-ms = <3000>;
     };
 
     keymap {
