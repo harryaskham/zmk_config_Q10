@@ -126,14 +126,6 @@
         };
     };
     behaviors {
-        td_0_alt_ctrl: 0_alt_ctrl {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <400>;
-            bindings = <&sk LCTRL>, <<&kp LALT>, <&mt LCTRL N0>;
-        };
-    };
-    behaviors {
         td_sk_0_alt_ctrl: sk_0_alt_ctrl {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
