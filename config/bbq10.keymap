@@ -40,6 +40,17 @@
         };
     };
     behaviors {
+  	    sktt: mod_sk_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            require-prior-idle-ms = <125>;
+            bindings = <&sk>, <&tap>;  // press once to SK a mod, twice to tap
+        };
+    };
+    behaviors {
         mo_tog: behavior_mo_tog {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -119,7 +130,15 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
-            bindings = <&kp LALT>, <&mt LCTRL N0>;
+            bindings = <&sk LCTRL>, <<&kp LALT>, <&mt LCTRL N0>;
+        };
+    };
+    behaviors {
+        td_sk_0_alt_ctrl: sk_0_alt_ctrl {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <400>;
+            bindings = <&sktt N0 LCTRL>, <&sk LALT>;
         };
     };
 
@@ -156,10 +175,10 @@
 
                  &mkp LCLK                                                                                             &mkp RCLK
     &kp ESC                        &kp LGUI                                 &mkp LCLK                        &kp C_AC_BACK                       &kp C_AC_SEARCH
-    &mtt TAB Q       &mtt N1 W     &mtt N2 E   &mtt N3 R   &mtt &td_lpar T  &mtt &td_rpar Y &mtt UNDER U     &mtt MINUS I     &mtt PLUS O        &mtt AT P
+    &mtt TAB Q       &mtt N1 W     &mtt N2 E   &mtt N3 R   &mtt LPAR T      &mtt RPAR Y     &mtt UNDER U     &mtt MINUS I     &mtt PLUS O        &mtt AT P
     &bhm LCTRL A     &mtt N4 S     &mtt N5 D   &mtt N6 F   &mtt SLASH G     &mtt COLON H    &mtt SEMI J      &mtt APOS K      &mtt DQT L         &kp BSPC
     &sk LSHIFT       &mtt N7 Z     &mtt N8 X   &mtt N9 C   &mtt QMARK V     &mtt EXCL B     &mtt COMMA N     &mtt DOT M       &mtt PIPE DOLLAR   &kp ENTER
-    &tog LOWER                     &td_0_alt_ctrl                           &kp SPACE                        &tog SYM                            &tog UPPER
+    &tog LOWER                     &td_sk_0_alt_ctrl                        &kp SPACE                        &tog SYM                            &tog UPPER
             >;
         };
 
