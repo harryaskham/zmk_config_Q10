@@ -122,7 +122,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
-            bindings = <&kp HASH>, <&mtt GRAVE TILDE>;
+            bindings = <&kp HASH>, <&kp GRAVE>, <&kp TILDE>;
         };
     };
     behaviors {
@@ -132,6 +132,24 @@
             tapping-term-ms = <400>;
             bindings = <&sk LCTRL>, <&sk LALT>, <&kp N0>;
         };
+    };
+    behaviors {
+        gresc_inner: grave_escape_inner {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE>, <&kp TILDE>;
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+        gresc: grave_escape {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp ESC>, <&gresc_inner>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    &sk {
+      release-after-ms = <3000>;
     };
 
     keymap {
@@ -149,28 +167,12 @@
 //        |         aA     |         0           |           SPACE              |         SYM         |        aA          |       
 //        -----------------------------------------------------------------------------------------------------------------
 
-// ctrl-a via taphold 0 a
-// alt-n via hold a, hold n
-// tap t, hold (, double tap [, double hold {
-// upper-dollar to flash bootloader
-// Double click trackpad in upper to clear BT when pairing new device
-// Toggle bluetooth or usb with upper+space-hold
-// upper has WASD, lower has ijkl arrows
-// shift is sticky
-// quick access:
-// double hold + for =
-//             / for \
-//             , for <
-//             . for >
-//             a for *
-//             q for #
-
                  &mkp LCLK                                                                                             &mkp RCLK
-    &kp ESC                        &kp LGUI                                 &mkp LCLK                        &kp C_AC_BACK                       &kp C_AC_SEARCH
+    &gresc                         &kp LGUI                                 &mkp LCLK                        &kp C_AC_CLOSE                      &kp C_AC_SEARCH
     &mtt TAB Q       &mtt N1 W     &mtt N2 E   &mtt N3 R   &mtt LPAR T      &mtt RPAR Y     &mtt UNDER U     &mtt MINUS I     &mtt PLUS O        &mtt AT P
     &bhm LCTRL A     &mtt N4 S     &mtt N5 D   &mtt N6 F   &mtt SLASH G     &mtt COLON H    &mtt SEMI J      &mtt APOS K      &mtt DQT L         &kp BSPC
     &sk LSHIFT       &mtt N7 Z     &mtt N8 X   &mtt N9 C   &mtt QMARK V     &mtt EXCL B     &mtt COMMA N     &mtt DOT M       &mtt PIPE DOLLAR   &kp ENTER
-    &tog LOWER                     &td_0_alt_ctrl                        &kp SPACE                        &tog SYM                            &tog UPPER
+    &tog LOWER                     &td_0_alt_ctrl                           &kp SPACE                        &tog SYM                            &tog UPPER
             >;
         };
 
@@ -180,7 +182,7 @@
             bindings = <        
                  &kp SCRL_UP                                                                                     &kp SCRL_DOWN
     &trans                       &trans                                      &trans                           &trans                              &trans
-    &td_hash_gr_ti    &kp N1     &kp N2      &kp N3    &td_lpar              &td_rpar        &kp UNDER        &kp MINUS        &mtt KP_EQUAL PLUS &kp AT
+    &kp HASH          &kp N1     &kp N2      &kp N3    &td_lpar              &td_rpar        &kp UNDER        &kp MINUS        &mtt KP_EQUAL PLUS &kp AT
     &bhm LCTRL STAR   &kp N4     &kp N5      &kp N6    &mtt BACKSLASH SLASH  &kp COLON       &kp SEMI         &kp APOS         &kp DQT            &kp DEL
     &trans            &kp N7     &kp N8      &kp N9    &kp QMARK             &kp EXCL        &mtt LT COMMA    &mtt GT DOT      &trans             &kp ENTER
     &trans                       &trans                                      &kp SPACE                        &trans                              &trans
@@ -202,12 +204,12 @@
         lower_layer {
 
             bindings = <
-                 &kp PAGE_UP                                                                                          &kp PAGE_DOWN
-    &trans          &trans                                           &mkp LCLK                   &trans                            &trans
-    &trans          &trans       &trans     &trans     &trans        &kp PAGE_UP   &msc SCRL_UP  &kp UP          &msc SCRL_DOWN    &trans
-    &trans          &trans       &trans     &trans     &trans        &kp PAGE_DOWN &kp LEFT      &kp DOWN        &kp RIGHT         &trans
-    &trans          &trans       &trans     &trans     &trans        &trans        &trans        &trans          &trans            &trans
-    &trans                       &trans                              &trans                      &trans                            &trans
+                 &trans                                                                                          &trans
+    &trans                       &trans                              &mkp LCLK                   &trans                            &trans
+    &kp TAB         &kp F1       &kp F2     &kp F3     &trans        &kp PAGE_UP   &msc SCRL_UP  &kp UP          &msc SCRL_DOWN    &trans
+    &sk LCTRL       &kp F4       &kp F5     &kp F6     &trans        &kp PAGE_DOWN &kp LEFT      &kp DOWN        &kp RIGHT         &trans
+    &sk LSHIFT      &kp F7       &kp F8     &kp F9     &trans        &trans        &trans        &trans          &trans            &trans
+    &trans                       &sk LALT                            &trans                      &trans                            &trans
             >;
         };
 
