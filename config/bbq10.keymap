@@ -147,7 +147,7 @@
         };
     };
     behaviors {
-        td_q_tab_hash: a_ctrl_star {
+        td_q_tab_hash: q_tab_hash {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <400>;
